@@ -3,4 +3,11 @@
     <string name="log_everpobre_starting">Everpobre is alive</string>
     <string name="log_everpobre_low_memory">Everpobre running low on memory</string>
     <string name="Everpobre">Everpobre</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="main_activity_title">Everpobre notebooks</string>
+    <string name="title_activity_edit_notebook">Edit Notebook</string>
+    <string name="new_notebook">New Notebook</string>
 </resources>
