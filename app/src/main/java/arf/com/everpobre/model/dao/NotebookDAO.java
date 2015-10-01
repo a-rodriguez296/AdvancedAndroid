@@ -45,7 +45,7 @@ public class NotebookDAO implements DaoPersistable<Notebook>{
         final DBHelper dbHelper = DBHelper.getInstance(context.get());
 
         //Esto es una conexión a la DB.
-        SQLiteDatabase db = getDBConection(dbHelper);
+        SQLiteDatabase db = DBHelper.getDb(dbHelper);
 
         db.beginTransaction();
         long id = INVALID_ID;
@@ -78,7 +78,7 @@ public class NotebookDAO implements DaoPersistable<Notebook>{
         final DBHelper dbHelper = DBHelper.getInstance(context.get());
 
         //Esto es una conexión a la DB.
-        SQLiteDatabase db = getDBConection(dbHelper);
+        SQLiteDatabase db = DBHelper.getDb(dbHelper);
 
         db.beginTransaction();
 
@@ -99,7 +99,7 @@ public class NotebookDAO implements DaoPersistable<Notebook>{
         final DBHelper dbHelper = DBHelper.getInstance(context.get());
 
         //Esto es una conexión a la DB.
-        SQLiteDatabase db = getDBConection(dbHelper);
+        SQLiteDatabase db = DBHelper.getDb(dbHelper);
 
         if (id == INVALID_ID){
             db.delete(TABLE_NOTEBOOK, null, null);
@@ -134,7 +134,7 @@ public class NotebookDAO implements DaoPersistable<Notebook>{
         final DBHelper dbHelper = DBHelper.getInstance(context.get());
 
         //Esto es una conexión a la DB.
-        SQLiteDatabase db = getDBConection(dbHelper);
+        SQLiteDatabase db = DBHelper.getDb(dbHelper);
 
         Cursor cursor = db.query(TABLE_NOTEBOOK, allColumns, null, null, null, null, KEY_NOTEBOOK_ID);
 
@@ -147,7 +147,7 @@ public class NotebookDAO implements DaoPersistable<Notebook>{
         final DBHelper dbHelper = DBHelper.getInstance(context.get());
 
         //Esto es una conexión a la DB.
-        SQLiteDatabase db = getDBConection(dbHelper);
+        SQLiteDatabase db = DBHelper.getDb(dbHelper);
 
         final String whereClause = KEY_NOTEBOOK_ID + "="+ id;
 
@@ -174,17 +174,6 @@ public class NotebookDAO implements DaoPersistable<Notebook>{
         db.close();
 
         return notebook;
-    }
-
-    private static SQLiteDatabase getDBConection(DBHelper dbHelper) {
-        SQLiteDatabase db = null;
-        try{
-            db = dbHelper.getWritableDatabase();
-        }
-        catch (SQLiteException e){
-            db = dbHelper.getReadableDatabase();
-        }
-        return db;
     }
 
     public static ContentValues getContentValues(@NonNull Notebook notebook) {

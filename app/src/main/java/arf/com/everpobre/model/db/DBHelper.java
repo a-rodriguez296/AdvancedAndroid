@@ -2,6 +2,7 @@ package arf.com.everpobre.model.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
@@ -66,6 +67,16 @@ public class DBHelper extends SQLiteOpenHelper {
 
         // if API LEVEL > 16, use this
         // db.setForeignKeyConstraintsEnabled(true);
+    }
+
+    public static SQLiteDatabase getDb(DBHelper dbHelper) {
+        SQLiteDatabase db = null;
+        try {
+            db = dbHelper.getWritableDatabase();
+        } catch (SQLiteException e) {
+            db = dbHelper.getReadableDatabase();
+        }
+        return db;
     }
 
 

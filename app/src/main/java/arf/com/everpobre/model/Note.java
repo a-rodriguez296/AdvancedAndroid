@@ -7,13 +7,13 @@ public class Note {
 
     private long id;
     private String text;
-    private Date creationgDate;
+    private Date creationDate;
     private Date modificationDate;
     private String photoURL;
     private WeakReference<Notebook>  notebook;
     private double longitude;
     private double latitude;
-    public boolean hasCoordinate;
+    public boolean hasCoordinates;
     public String address;
 
     public Note(String name, Notebook notebook) {
@@ -37,12 +37,12 @@ public class Note {
         this.text = text;
     }
 
-    public Date getCreationgDate() {
-        return creationgDate;
+    public Date getCreationDate() {
+        return creationDate;
     }
 
-    public void setCreationgDate(Date creationgDate) {
-        this.creationgDate = creationgDate;
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
     public Date getModificationDate() {
@@ -85,12 +85,12 @@ public class Note {
         this.latitude = latitude;
     }
 
-    public boolean isHasCoordinate() {
-        return hasCoordinate;
+    public boolean isHasCoordinates() {
+        return hasCoordinates;
     }
 
-    public void setHasCoordinate(boolean hasCoordinate) {
-        this.hasCoordinate = hasCoordinate;
+    public void setHasCoordinates(boolean hasCoordinates) {
+        this.hasCoordinates = hasCoordinates;
     }
 
     public String getAddress() {
