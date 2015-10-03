@@ -53,6 +53,7 @@ public class NotebookDAO implements DaoPersistable<Notebook>{
         try{
             id = db.insert(TABLE_NOTEBOOK,null, getContentValues(data));
             //data.setId(id);
+            db.setTransactionSuccessful();
         }
         finally {
             db.endTransaction();
@@ -159,20 +160,27 @@ public class NotebookDAO implements DaoPersistable<Notebook>{
                 Por eso hay que hacer move to first*/
                 cursor.moveToFirst();
 
-                notebook= new Notebook(cursor.getString(cursor.getColumnIndex(KEY_NOTEBOOK_NAME)));
-                notebook.setId(cursor.getLong(cursor.getColumnIndex(KEY_NOTEBOOK_ID)));
-
-                long creationDate = cursor.getLong(cursor.getColumnIndex(KEY_NOTEBOOK_CREATION_DATE));
-                long modificationDate = cursor.getLong(cursor.getColumnIndex(KEY_NOTE_MODIFICATION_DATE));
-
-                notebook.setCreationgDate(DBHelper.convertLongToDate(creationDate));
-                notebook.setModificationDate(DBHelper.convertLongToDate(modificationDate));
+                notebook = notebookFromCursor(cursor);
             }
         }
 
         cursor.close();
         db.close();
 
+        return notebook;
+    }
+
+    @NonNull
+    public static Notebook notebookFromCursor(Cursor cursor) {
+        Notebook notebook;
+        notebook= new Notebook(cursor.getString(cursor.getColumnIndex(KEY_NOTEBOOK_NAME)));
+        notebook.setId(cursor.getLong(cursor.getColumnIndex(KEY_NOTEBOOK_ID)));
+
+        long creationDate = cursor.getLong(cursor.getColumnIndex(KEY_NOTEBOOK_CREATION_DATE));
+        long modificationDate = cursor.getLong(cursor.getColumnIndex(KEY_NOTE_MODIFICATION_DATE));
+
+        notebook.setCreationgDate(DBHelper.convertLongToDate(creationDate));
+        notebook.setModificationDate(DBHelper.convertLongToDate(modificationDate));
         return notebook;
     }
 

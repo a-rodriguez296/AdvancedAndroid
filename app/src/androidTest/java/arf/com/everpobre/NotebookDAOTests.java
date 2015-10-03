@@ -1,5 +1,6 @@
 package arf.com.everpobre;
 
+import android.database.Cursor;
 import android.test.AndroidTestCase;
 
 import arf.com.everpobre.model.Notebook;
@@ -9,9 +10,9 @@ import arf.com.everpobre.model.db.DBHelper;
 /**
  * Created by arodriguez on 9/30/15.
  */
-public class NotebookDAOTests extends AndroidTestCase{
+public class NotebookDAOTests extends AndroidTestCase {
 
-    public void testInsertNullNotebook(){
+    public void testInsertNullNotebook() {
 
         Notebook notebook = null;
 
@@ -22,7 +23,7 @@ public class NotebookDAOTests extends AndroidTestCase{
         assertEquals(id, DBHelper.INVALID_ID);
     }
 
-    public void testInsertNotebookNotebookWithNullName(){
+    public void testInsertNotebookNotebookWithNullName() {
 
         Notebook notebook = new Notebook("");
         notebook.setName(null);
@@ -34,7 +35,7 @@ public class NotebookDAOTests extends AndroidTestCase{
         assertEquals(id, DBHelper.INVALID_ID);
     }
 
-    public void testInsertValidNotebook(){
+    public void testInsertValidNotebook() {
 
         Notebook notebook = new Notebook("notebook");
 
@@ -43,7 +44,21 @@ public class NotebookDAOTests extends AndroidTestCase{
 
         long id = notebookDAO.insert(notebook);
 
-        assertTrue(id>0);
+        assertTrue(id > 0);
+
+    }
+
+    public void testNotebookCount() {
+
+        NotebookDAO notebookDAO = new NotebookDAO(getContext());
+        Notebook notebook = new Notebook("notebook");
+        notebookDAO.insert(notebook);
+
+
+        Cursor cursor = notebookDAO.queryCursor();
+
+        //Con esto me aseguro que hay por lo menos un notebook en la tabla
+        assertTrue(cursor.moveToFirst());
 
     }
 
