@@ -76,10 +76,17 @@ public class EditNotebookActivity extends AppCompatActivity {
 
     private void deleteNotebook() {
 
+        if (notebook== null){
+            return;
+        }
+        final NotebookDAO notebookDAO = new NotebookDAO(this);
+        notebookDAO.delete(notebook.getId());
+
+        finish();
+
     }
 
     private void saveNotebook() {
-
 
         final String notebookName = txtNotebookName.getText().toString();
 
@@ -95,11 +102,11 @@ public class EditNotebookActivity extends AppCompatActivity {
         if (editMode == EditMode.ADDING){
             final Notebook notebookToAdd = new Notebook(txtNotebookName.getText().toString());
             notebookDAO.insert(notebookToAdd);
-            finish();
         }
         else {
             this.notebook.setName(notebookName);
             notebookDAO.update(this.notebook.getId(), this.notebook);
         }
+        finish();
     }
 }

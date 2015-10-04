@@ -86,6 +86,7 @@ public class NotebookDAO implements DaoPersistable<Notebook>{
 
         try {
             db.update(TABLE_NOTEBOOK, getContentValues(data), KEY_NOTEBOOK_ID +"=?", new String[]{""+ id});
+            db.setTransactionSuccessful();
         }
         finally {
             db.endTransaction();

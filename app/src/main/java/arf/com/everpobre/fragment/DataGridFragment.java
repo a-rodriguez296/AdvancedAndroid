@@ -53,7 +53,6 @@ public class DataGridFragment extends Fragment {
 
 
         cursor = new NotebookDAO(getActivity()).queryCursor();
-        cursor.moveToFirst();
         adapter = new DataGridAdapter(getActivity(),cursor);
         gridView.setAdapter(adapter);
 
