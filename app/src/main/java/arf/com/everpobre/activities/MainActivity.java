@@ -7,19 +7,33 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import arf.com.everpobre.R;
+import arf.com.everpobre.fragment.DataGridFragment;
 import arf.com.everpobre.model.Notebook;
 import arf.com.everpobre.model.dao.NotebookDAO;
 
 public class MainActivity extends AppCompatActivity {
+
+   DataGridFragment notebookFragment;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        notebookFragment = (DataGridFragment) getFragmentManager().findFragmentById(R.id.grid_fragment);
 
-        insertNotebookStubs(10);
 
+//        insertNotebookStubs(10);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        notebookFragment.refreshData();
     }
 
     private void insertNotebookStubs(final int notebooksToInsert) {
@@ -30,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
             long id = notebookDAO.insert(notebook);
         }
     }
+
+
 
 
     @Override

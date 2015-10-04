@@ -14,4 +14,7 @@
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dummy_text">Hola</string>
+    <string name="notebook_name_hint">Notebook name</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
 </resources>

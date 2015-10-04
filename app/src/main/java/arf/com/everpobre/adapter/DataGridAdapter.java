@@ -24,14 +24,14 @@ public class DataGridAdapter extends CursorAdapter {
 
 
     private LayoutInflater layoutInflater;
-    private Cursor cursor;
+    private Cursor dataCursor;
 
 
     public DataGridAdapter(Context context, Cursor c) {
         super(context, c);
 
         this.layoutInflater = LayoutInflater.from(context);
-        this.cursor = c;
+        this.dataCursor = c;
 
     }
 
@@ -57,7 +57,7 @@ public class DataGridAdapter extends CursorAdapter {
             view.setTag(holder);
         }
 
-        Notebook notebook = NotebookDAO.notebookFromCursor(cursor);
+        Notebook notebook = NotebookDAO.notebookFromCursor(dataCursor);
         holder.txtTitle.setText(notebook.getName());
 
         return view;

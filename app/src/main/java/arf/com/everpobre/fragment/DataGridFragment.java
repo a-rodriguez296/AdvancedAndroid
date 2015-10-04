@@ -15,6 +15,7 @@ import android.widget.Toast;
 import arf.com.everpobre.R;
 import arf.com.everpobre.activities.EditNotebookActivity;
 import arf.com.everpobre.adapter.DataGridAdapter;
+import arf.com.everpobre.model.Notebook;
 import arf.com.everpobre.model.dao.NotebookDAO;
 
 
@@ -44,7 +45,15 @@ public class DataGridFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         gridView = (GridView) getActivity().findViewById(R.id.grid_view);
+        refreshData();
+
+    }
+
+    public void refreshData() {
+
+
         cursor = new NotebookDAO(getActivity()).queryCursor();
+        cursor.moveToFirst();
         adapter = new DataGridAdapter(getActivity(),cursor);
         gridView.setAdapter(adapter);
 
@@ -62,7 +71,12 @@ public class DataGridFragment extends Fragment {
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Toast.makeText(getActivity(), "se hizo long click", Toast.LENGTH_SHORT).show();
 
+                NotebookDAO notebookDAO = new NotebookDAO(getActivity());
+                Notebook notebook = notebookDAO.query(id);
+
+
                 Intent intent = new Intent(getActivity(), EditNotebookActivity.class);
+                intent.putExtra(EditNotebookActivity.NOTEBOOK_EXTRA, notebook);
                 startActivity(intent);
 
 
@@ -71,5 +85,6 @@ public class DataGridFragment extends Fragment {
                 return true;
             }
         });
+
     }
 }
