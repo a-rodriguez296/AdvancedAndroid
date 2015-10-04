@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import arf.com.everpobre.R;
+import arf.com.everpobre.model.Notebook;
+import arf.com.everpobre.model.dao.NotebookDAO;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,7 +16,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        insertNotebookStubs(10);
+
     }
+
+    private void insertNotebookStubs(final int notebooksToInsert) {
+        NotebookDAO notebookDAO = new NotebookDAO(this);
+        for (int i = 0; i < notebooksToInsert; i++) {
+            final String testTitle = String.format("%s %d", "Notebook title", i);
+            final Notebook notebook = new Notebook(testTitle);
+            long id = notebookDAO.insert(notebook);
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -28,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         int id = item.getItemId();
 
-        if(id == R.id.action_new_notebook){
+        if (id == R.id.action_new_notebook) {
 
             Intent editNotebook = new Intent(this, EditNotebookActivity.class);
             startActivity(editNotebook);
@@ -38,4 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

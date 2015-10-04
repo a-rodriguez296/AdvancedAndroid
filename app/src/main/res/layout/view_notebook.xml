@@ -10,14 +10,14 @@
         android:layout_width="@dimen/grid_view_icon_width"
         android:layout_height="@dimen/grid_view_icon_width"
         android:id="@+id/icon_notebook"
-        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
         android:layout_alignParentTop="true"/>
 
     <!--Con tools se hace para que se muestre solo en diseño pero no en ejecucion-->
 
     <TextView
         android:id="@+id/text_notebook_name"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="@string/dummy_text"
         android:layout_below="@+id/icon_notebook"
