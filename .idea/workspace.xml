@@ -37,12 +37,8 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Everpobre" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d2533544-a7e1-407c-a176-279d85f00b45" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/arf/com/everpobre/adapter/DataGridAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/arf/com/everpobre/adapter/DataGridAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/arf/com/everpobre/activities/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/arf/com/everpobre/activities/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/androidTest/java/arf/com/everpobre/NotebookTests.java" afterPath="$PROJECT_DIR$/app/src/androidTest/java/arf/com/everpobre/NotebookTests.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_data_grid.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_data_grid.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/view_notebook.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/view_notebook.xml" />
+    <list default="true" id="d2533544-a7e1-407c-a176-279d85f00b45" name="Default" comment="Se implemento el patron view-holder el el data-grid">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/arf/com/everpobre/fragment/DataGridFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/arf/com/everpobre/fragment/DataGridFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Advanced.iws" />
@@ -64,15 +60,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DataGridAdapter.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/arf/com/everpobre/adapter/DataGridAdapter.java">
+      <file leaf-file-name="DataGridFragment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/arf/com/everpobre/fragment/DataGridFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.48228884">
-              <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.76397514">
+              <caret line="70" column="28" selection-start-line="70" selection-start-column="28" selection-end-line="70" selection-end-column="28" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1630#1631#0" expanded="true" />
-                <element signature="e#1657#1658#0" expanded="true" />
+                <element signature="e#1458#1726#0" expanded="true" />
+                <element signature="e#1725#1726#0" expanded="true" />
+                <element signature="e#1774#2363#0" expanded="true" />
+                <element signature="e#2362#2363#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1530,7 +1527,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/arf/com/everpobre/model/dao/NoteDAO.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/arf/com/everpobre/activities/DataGridFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/arf/com/everpobre/fragment/DataGridFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/arf/com/everpobre/model/dao/NotebookDAO.java" />
         <option value="$PROJECT_DIR$/app/src/androidTest/java/arf/com/everpobre/NotebookDAOTests.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_data_grid.xml" />
@@ -1538,6 +1534,7 @@
         <option value="$PROJECT_DIR$/app/src/androidTest/java/arf/com/everpobre/NotebookTests.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/arf/com/everpobre/activities/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/arf/com/everpobre/adapter/DataGridAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/arf/com/everpobre/fragment/DataGridFragment.java" />
       </list>
     </option>
   </component>
@@ -1709,7 +1706,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="adapter" />
+              <option name="myItemId" value="fragment" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2067,7 +2064,13 @@
       <option name="project" value="LOCAL" />
       <updated>1443915621128</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Se implemento el patron view-holder el el data-grid">
+      <created>1443975720164</created>
+      <option name="number" value="00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1443975720164</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -2081,7 +2084,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298292" sideWeight="0.5028694" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298292" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3298292" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298292" sideWeight="0.49713057" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298292" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2120,14 +2123,15 @@
     <MESSAGE value="Haciendo el DAO de notebook" />
     <MESSAGE value="Terminando la clase DAO de note" />
     <MESSAGE value="Comenzando a ver el gridView" />
-    <option name="LAST_COMMIT_MESSAGE" value="Comenzando a ver el gridView" />
+    <MESSAGE value="Se implemento el patron view-holder el el data-grid" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se implemento el patron view-holder el el data-grid" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/arf/com/everpobre/fragment/DataGridFragment.java</url>
-          <line>42</line>
+          <line>46</line>
           <properties />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
@@ -2185,7 +2189,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="44" column="37" selection-start-line="44" selection-start-column="37" selection-end-line="44" selection-end-column="37" />
-          <folding />
+          <folding>
+            <element signature="e#1458#1726#0" expanded="true" />
+            <element signature="e#1725#1726#0" expanded="true" />
+            <element signature="e#1774#2363#0" expanded="true" />
+            <element signature="e#2362#2363#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2264,7 +2273,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="20" column="10" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
-          <folding />
+          <folding>
+            <element signature="e#1458#1726#0" expanded="true" />
+            <element signature="e#1725#1726#0" expanded="true" />
+            <element signature="e#1774#2363#0" expanded="true" />
+            <element signature="e#2362#2363#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2447,14 +2461,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/arf/com/everpobre/fragment/DataGridFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="1" selection-start-line="46" selection-start-column="1" selection-end-line="46" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/arf/com/everpobre/model/dao/DaoPersistable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2541,12 +2547,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/arf/com/everpobre/adapter/DataGridAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48228884">
-          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.3010899">
+          <caret line="47" column="23" selection-start-line="47" selection-start-column="23" selection-end-line="47" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1630#1631#0" expanded="true" />
             <element signature="e#1657#1658#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/arf/com/everpobre/fragment/DataGridFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.76397514">
+          <caret line="70" column="28" selection-start-line="70" selection-start-column="28" selection-end-line="70" selection-end-column="28" />
+          <folding>
+            <element signature="e#1458#1726#0" expanded="true" />
+            <element signature="e#1725#1726#0" expanded="true" />
+            <element signature="e#1774#2363#0" expanded="true" />
+            <element signature="e#2362#2363#0" expanded="true" />
           </folding>
         </state>
       </provider>
