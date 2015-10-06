@@ -12,8 +12,11 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import java.lang.ref.WeakReference;
+
 import arf.com.everpobre.R;
 import arf.com.everpobre.activities.EditNotebookActivity;
+import arf.com.everpobre.activities.ShowNotebookActivity;
 import arf.com.everpobre.adapter.DataGridAdapter;
 import arf.com.everpobre.model.Notebook;
 import arf.com.everpobre.model.dao.NotebookDAO;
@@ -21,10 +24,25 @@ import arf.com.everpobre.model.dao.NotebookDAO;
 
 public class DataGridFragment extends Fragment {
 
-
     private GridView gridView;
     private DataGridAdapter adapter;
     private Cursor cursor;
+    private int idLayout = R.layout.fragment_data_grid;
+    private int idGridView;
+
+
+    private OnDataGridFragmentClickListener mListener;
+
+    public static DataGridFragment getInstance(Cursor cursor, int idLayout, int idGridView){
+        DataGridFragment fragment = new DataGridFragment();
+
+        fragment.cursor = cursor;
+        fragment.idLayout = idLayout;
+        fragment.idGridView = idGridView;
+
+        return fragment;
+    }
+
 
     public DataGridFragment() {
         // Required empty public constructor
@@ -36,7 +54,7 @@ public class DataGridFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_data_grid, container, false);
+        return inflater.inflate(idLayout, container, false);
     }
 
 
@@ -44,15 +62,23 @@ public class DataGridFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        gridView = (GridView) getActivity().findViewById(R.id.grid_view);
-        refreshData();
+        gridView = (GridView) getActivity().findViewById(idGridView);
+
+        if (gridView!=null){
+            refreshData();
+        }
+
 
     }
 
     public void refreshData() {
 
+        if (cursor == null){
+            return;
+        }
 
-        cursor = new NotebookDAO(getActivity()).queryCursor();
+        gridView = (GridView) getActivity().findViewById(idGridView);
+
         adapter = new DataGridAdapter(getActivity(),cursor);
         gridView.setAdapter(adapter);
 
@@ -61,29 +87,67 @@ public class DataGridFragment extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(), "se hizo click", Toast.LENGTH_SHORT).show();
+
+                if (mListener != null) {
+                    mListener.dataGridElementClick(adapterView, view, i, l);
+                }
+
             }
         });
 
         gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Toast.makeText(getActivity(), "se hizo long click", Toast.LENGTH_SHORT).show();
 
-                NotebookDAO notebookDAO = new NotebookDAO(getActivity());
-                Notebook notebook = notebookDAO.query(id);
-
-
-                Intent intent = new Intent(getActivity(), EditNotebookActivity.class);
-                intent.putExtra(EditNotebookActivity.NOTEBOOK_EXTRA, notebook);
-                startActivity(intent);
-
-
-                /*Si se pone true quiere decir que yo ya hice el handle del onClick
-                por tal razón no pasa al onItemClick*/
+                if (mListener != null) {
+                    mListener.dataGridElementLongClick(adapterView, view, position, id);
+                }
                 return true;
             }
         });
+
+    }
+
+
+    public Cursor getCursor() {
+        return cursor;
+    }
+
+    public void setCursor(Cursor cursor) {
+        this.cursor = cursor;
+    }
+
+    public int getIdLayout() {
+        return idLayout;
+    }
+
+    public void setIdLayout(int idLayout) {
+        this.idLayout = idLayout;
+    }
+
+    public int getIdGridView() {
+        return idGridView;
+    }
+
+    public void setIdGridView(int idGridView) {
+        this.idGridView = idGridView;
+    }
+
+    public OnDataGridFragmentClickListener getListener() {
+        return mListener;
+    }
+
+    public void setListener(OnDataGridFragmentClickListener mListener) {
+        this.mListener = mListener;
+    }
+
+    public interface OnDataGridFragmentClickListener{
+
+        //Short click
+        void dataGridElementClick(AdapterView<?> adapterView, View view, int i, long l);
+
+        //Long click
+        void dataGridElementLongClick(AdapterView<?> adapterView, View view, int position, long id);
 
     }
 }

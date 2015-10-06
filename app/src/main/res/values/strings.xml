@@ -17,4 +17,5 @@
     <string name="notebook_name_hint">Notebook name</string>
     <string name="save">Save</string>
     <string name="delete">Delete</string>
+    <string name="title_activity_show_notebook">ShowNotebookActivity</string>
 </resources>

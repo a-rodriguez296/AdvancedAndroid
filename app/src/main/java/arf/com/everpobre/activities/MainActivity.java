@@ -1,10 +1,13 @@
 package arf.com.everpobre.activities;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 
 import arf.com.everpobre.R;
 import arf.com.everpobre.fragment.DataGridFragment;
@@ -25,6 +28,37 @@ public class MainActivity extends AppCompatActivity {
 
         notebookFragment = (DataGridFragment) getFragmentManager().findFragmentById(R.id.grid_fragment);
 
+        Cursor cursor = new NotebookDAO(this).queryCursor();
+        notebookFragment.setCursor(cursor);
+
+        notebookFragment.setIdLayout(R.layout.fragment_data_grid);
+        notebookFragment.setIdGridView(R.id.grid_view);
+
+        notebookFragment.setListener(new DataGridFragment.OnDataGridFragmentClickListener() {
+            @Override
+            public void dataGridElementClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Intent intent = new Intent(MainActivity.this, ShowNotebookActivity.class);
+                startActivity(intent);
+
+
+            }
+
+            @Override
+            public void dataGridElementLongClick(AdapterView<?> adapterView, View view, int position, long id) {
+
+
+                //MainActivity.this es la forma de obtener el this de afuera del listener.
+                NotebookDAO notebookDAO = new NotebookDAO(MainActivity.this);
+                Notebook notebook = notebookDAO.query(id);
+
+
+                Intent intent = new Intent(MainActivity.this, EditNotebookActivity.class);
+                intent.putExtra(EditNotebookActivity.NOTEBOOK_EXTRA, notebook);
+                startActivity(intent);
+
+            }
+        });
 
 //        insertNotebookStubs(10);
 
@@ -33,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        Cursor cursor = new NotebookDAO(this).queryCursor();
+        notebookFragment.setCursor(cursor);
         notebookFragment.refreshData();
     }
 

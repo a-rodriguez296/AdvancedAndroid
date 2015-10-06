@@ -21,6 +21,8 @@
             android:name=".activities.EditNotebookActivity"
             android:label="@string/title_activity_edit_notebook" >
         </activity>
+        <activity android:name=".activities.ShowNotebookActivity" >
+        </activity>
     </application>
 
 </manifest>
