@@ -1,6 +1,7 @@
 package arf.com.everpobre;
 
 import android.app.Application;
+import android.content.ContentProvider;
 import android.content.Context;
 import android.util.Log;
 
@@ -33,5 +34,7 @@ public class EverpobreApp extends Application{
     }
 
 
-
+    public static Context getAppContext(){
+        return sContext.get();
+    }
 }
