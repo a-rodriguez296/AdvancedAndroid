@@ -23,6 +23,11 @@
         </activity>
         <activity android:name=".activities.ShowNotebookActivity" >
         </activity>
+
+        <!--Content providers-->
+        <provider
+            android:authorities="arf.com.everpobre.provider"
+            android:name=".providers.EverpobreProvider" />
     </application>
 
 </manifest>

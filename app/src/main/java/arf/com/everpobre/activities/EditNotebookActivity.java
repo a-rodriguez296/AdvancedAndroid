@@ -11,6 +11,7 @@ import android.widget.Toast;
 import arf.com.everpobre.R;
 import arf.com.everpobre.model.Notebook;
 import arf.com.everpobre.model.dao.NotebookDAO;
+import arf.com.everpobre.providers.EverpobreProvider;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -79,8 +80,10 @@ public class EditNotebookActivity extends AppCompatActivity {
         if (notebook== null){
             return;
         }
-        final NotebookDAO notebookDAO = new NotebookDAO(this);
-        notebookDAO.delete(notebook.getId());
+        /*final NotebookDAO notebookDAO = new NotebookDAO(this);
+        notebookDAO.delete(notebook.getId());*/
+
+        EverpobreProvider.deleteNotebook(notebook.getId());
 
         finish();
 
