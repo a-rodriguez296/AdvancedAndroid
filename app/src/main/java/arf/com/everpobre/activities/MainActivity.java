@@ -1,6 +1,9 @@
 package arf.com.everpobre.activities;
 
+import android.app.LoaderManager;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,8 +16,9 @@ import arf.com.everpobre.R;
 import arf.com.everpobre.fragment.DataGridFragment;
 import arf.com.everpobre.model.Notebook;
 import arf.com.everpobre.model.dao.NotebookDAO;
+import arf.com.everpobre.providers.EverpobreProvider;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
    DataGridFragment notebookFragment;
 
@@ -28,37 +32,16 @@ public class MainActivity extends AppCompatActivity {
 
         notebookFragment = (DataGridFragment) getFragmentManager().findFragmentById(R.id.grid_fragment);
 
-        Cursor cursor = new NotebookDAO(this).queryCursor();
-        notebookFragment.setCursor(cursor);
+        LoaderManager loaderManager = getLoaderManager();
 
-        notebookFragment.setIdLayout(R.layout.fragment_data_grid);
-        notebookFragment.setIdGridView(R.id.grid_view);
-
-        notebookFragment.setListener(new DataGridFragment.OnDataGridFragmentClickListener() {
-            @Override
-            public void dataGridElementClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                Intent intent = new Intent(MainActivity.this, ShowNotebookActivity.class);
-                startActivity(intent);
+        //El 0 es un identificador único para este loader.
+        loaderManager.initLoader(0,
+                null,//Bundle parámetro
+                this); //Delegado
 
 
-            }
-
-            @Override
-            public void dataGridElementLongClick(AdapterView<?> adapterView, View view, int position, long id) {
-
-
-                //MainActivity.this es la forma de obtener el this de afuera del listener.
-                NotebookDAO notebookDAO = new NotebookDAO(MainActivity.this);
-                Notebook notebook = notebookDAO.query(id);
-
-
-                Intent intent = new Intent(MainActivity.this, EditNotebookActivity.class);
-                intent.putExtra(EditNotebookActivity.NOTEBOOK_EXTRA, notebook);
-                startActivity(intent);
-
-            }
-        });
+        //Cursor cursor = new NotebookDAO(this).queryCursor();
+        //notebookFragment.setCursor(cursor);
 
 //        insertNotebookStubs(10);
 
@@ -67,9 +50,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Cursor cursor = new NotebookDAO(this).queryCursor();
+        /*Cursor cursor = new NotebookDAO(this).queryCursor();
         notebookFragment.setCursor(cursor);
-        notebookFragment.refreshData();
+        notebookFragment.refreshData();*/
     }
 
     private void insertNotebookStubs(final int notebooksToInsert) {
@@ -108,4 +91,50 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+
+        //Esto lo que hace es crear un hilo en 2do plano y pedirle al contentResolver q haga la consulta que le estoy pasando
+        CursorLoader loader = new CursorLoader(this, EverpobreProvider.NOTEBOOKS_URI, NotebookDAO.allColumns,null,null,null);
+        return loader;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+
+        notebookFragment.setCursor(cursor);
+
+        notebookFragment.setIdLayout(R.layout.fragment_data_grid);
+        notebookFragment.setIdGridView(R.id.grid_view);
+
+        notebookFragment.refreshData();
+
+        notebookFragment.setListener(new DataGridFragment.OnDataGridFragmentClickListener() {
+            @Override
+            public void dataGridElementClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Intent intent = new Intent(MainActivity.this, ShowNotebookActivity.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void dataGridElementLongClick(AdapterView<?> adapterView, View view, int position, long id) {
+
+
+                //MainActivity.this es la forma de obtener el this de afuera del listener.
+                NotebookDAO notebookDAO = new NotebookDAO(MainActivity.this);
+                Notebook notebook = notebookDAO.query(id);
+
+                Intent intent = new Intent(MainActivity.this, EditNotebookActivity.class);
+                intent.putExtra(EditNotebookActivity.NOTEBOOK_EXTRA, notebook);
+                startActivity(intent);
+
+            }
+        });
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+    }
 }

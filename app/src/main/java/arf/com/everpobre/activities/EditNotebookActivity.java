@@ -12,6 +12,7 @@ import arf.com.everpobre.R;
 import arf.com.everpobre.model.Notebook;
 import arf.com.everpobre.model.dao.NotebookDAO;
 import arf.com.everpobre.providers.EverpobreProvider;
+import arf.com.everpobre.providers.EverpobreProviderHelper;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -83,7 +84,7 @@ public class EditNotebookActivity extends AppCompatActivity {
         /*final NotebookDAO notebookDAO = new NotebookDAO(this);
         notebookDAO.delete(notebook.getId());*/
 
-        EverpobreProvider.deleteNotebook(notebook.getId());
+        EverpobreProviderHelper.deleteNotebook(notebook.getId());
 
         finish();
 
@@ -104,11 +105,12 @@ public class EditNotebookActivity extends AppCompatActivity {
 
         if (editMode == EditMode.ADDING){
             final Notebook notebookToAdd = new Notebook(txtNotebookName.getText().toString());
-            notebookDAO.insert(notebookToAdd);
+            EverpobreProviderHelper.insertNotebook(notebookToAdd);
         }
         else {
             this.notebook.setName(notebookName);
-            notebookDAO.update(this.notebook.getId(), this.notebook);
+            EverpobreProviderHelper.updateNotebook(this.notebook);
+
         }
         finish();
     }
